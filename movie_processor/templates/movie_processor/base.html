@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta http-equiv="expires" content="0">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    {% load staticfiles %}
+    <!-- Bootstrap CSS -->
+    <!-- <link rel = "stylesheet" href = "../../static/base.css"> -->
+    <link rel = "stylesheet" href = "{% static 'base.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    <script src="{% static 'refresh.js' %}" type="text/javascript"></script>
+  </head>
+
+<body>
+  <div class="container">
+      <!-- <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark"> 
+        <div class="col-9"><a class="navbar-brand" href = "{%url 'home' %}" ><h5><strong>Movie Processor</strong></h5></a></div>
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+        <div class = "col-0.5"><i class='fas fa-user' style='font-size:30px;color:white'></i></div> 
+    </nav> -->
+    <nav class="navbar navbar-expand-sm fixed-top navbar-dark bg-dark">        
+        <div class="col-9"><a class="navbar-brand text-white" href = "{%url 'home' %}" ><h4><strong>Movie Processor</strong></h4></a></div>
+        
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'home' %}">Home</a>
+              </li>
+              
+              {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'profile' user.id %}">Profile</a>
+              </li>
+              {% endif %}
+
+              <li class="nav-item">
+                  {% if not if_home %}
+                  <div class="input-group">
+                      <div class="input-group-prepend">
+                        <form action = "{% url 'search'%}" method="post">
+                        <button class="input-group-text" id="basic-addon1" type="submit">Search</button>
+                      </div>
+                      <input id="enterName" class="form-control mr-sm-2" type="text" name = "search_content" value = '' placeholder="name,director,tags" aria-label="Search" required = "required" onkeyup="autoSearch()">
+                      {% csrf_token %}
+                    </form>
+                    </div>
+                    {% endif %}
+              </li>
+              <li class="nav-item">
+                  {% if not user.username %}
+                  <div class = "col-0.5"><a href = "{% url 'login' %}"><i class='fas fa-user-alt' style='font-size:30px;color:white'></i></a></div>     
+                  {% else %}
+                  <a  class="nav-link">Hello,{{user.username}}</a>
+                  {% endif %}
+              </li>
+
+            </ul>
+        </div>
+        <!-- {% if user.username %}
+        <li class = "nav-item">
+          <a  class="text-white text-link">Hello,{{user.username}}</a>
+        </li>
+        {% endif %} -->
+      </nav>
+    </div>
+
+  <div class = "need_move_down">
+    {% block content%}  
+    {% endblock %}
+
+
+    {% block home %}
+    {% endblock %}
+
+    {% block register-page %}
+    {% endblock %}
+
+    {% block search-results %}
+    {% endblock %}
+
+    {% block user-profile %}
+    {% endblock %}
+
+</body>

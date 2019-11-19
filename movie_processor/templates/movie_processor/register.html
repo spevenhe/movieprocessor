@@ -1,0 +1,47 @@
+{% extends "movie_processor/base.html" %}
+
+{% block register-page%}
+<div class="bg_register">
+    <div class="d-flex justify-content-center">
+        <div class="card">
+            <div class="card-header">
+                <h3>Register</h3>
+            </div>
+            <div class="card-body">
+                <form method="post" action="{% url 'register' %}">
+                    <table align = "center" class = "register_page  text-white">
+                        {% for field in form.visible_fields %}
+                            <tr>
+                                <div class="form-group">
+                                
+                                <td>{{field}}</td>
+                                </div>
+                                <td class="error">
+                                    {% for error in field.errors %}{{error}}{% endfor %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                
+                        <tr>                        
+                            <th class = "button_table"><button class="btn btn-warning btn-block" type="submit" id = "id_register_button">register</button></th>
+                        </tr>     
+                    </table>
+                    {% csrf_token %}
+                
+                    {% for error in form.non_field_errors %}
+                        <p class="error1">
+                            {{ error }}
+                        </p>
+                    {% endfor %}
+                </form>
+            </div>
+        </div>
+    </div>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</div>
+{% endblock %}

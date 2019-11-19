@@ -1,0 +1,49 @@
+{% extends "movie_processor/base.html" %}
+
+
+{% block register-page%}
+<div class="bg_register">
+    <div class="container">
+    <div class="d-flex justify-content-center">
+        <div class="card">
+            <div class="card-header">
+                <h3>Log In</h3>
+            </div>
+            <div class="card-body">
+                <form method="post" action="{% url 'login' %}">
+                    <table align = "center" class="register_page text-white">
+                        {% for field in login_form.visible_fields %}
+                            <tr>
+                                <div class="form-group">
+                                    <th>{{field}}</th>
+                                </div>
+                            </tr>
+                        {% endfor %}
+                            <!-- {{login_form}} -->
+                        {% csrf_token %}
+                        <tr>
+                            {% for error in login_form.non_field_errors %}
+                                {{error}}
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <!-- <th></th> -->
+                            <th><button class="btn btn-warning btn-block" type="submit" id = "id_login_button">Submit</th>
+                        </tr> 
+                        <tr><th class="text-black">Would you like to be a movie fan?</th></tr>
+                        <tr><th><a href = "{%url 'register' %}">Register</a></th></tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</div>
+
+{% endblock %}

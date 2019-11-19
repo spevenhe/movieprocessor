@@ -1,0 +1,257 @@
+.input-group-text {
+  padding: 15px 25px;
+  font-size: 24px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: rgb(199, 206, 199);
+  border: none;
+  border-radius: 15px;
+
+}
+
+.input-group-text:hover {background-color: #d5dbd6}
+
+.input-group-text:active {
+  background-color: #b7bbb7;
+  transform: translateY(4px);
+}
+
+
+.bg, .bg_home, html {
+    height: 100%;
+    margin: 0;
+  }
+
+.need_move_down{
+   padding-top:40px !important;
+   background-color: white;
+}
+
+.bg {
+    /* background-image: url("https://wallpapercave.com/wp/wp1945897.jpg"); */
+    /* background-image:url("https://wallpapersite.com/images/pages/pic_h/11847.jpg"); */
+    padding-top:100px;
+    background-size:auto;
+    
+  }
+.bg_home{
+  background-image: url("https://wallpapercave.com/wp/wp1945897.jpg");
+  padding-top:230px;
+    /* Full height */
+  height: 100%;
+  background-position: 0 50px;
+  background-repeat: no-repeat; 
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.bg_register{
+  background-image: url("https://wallpapercave.com/wp/wp1945897.jpg");
+  padding-top:200px;
+    /* Full height */
+  height: 100%;
+  background-position: 0 50px;
+  background-repeat: no-repeat; 
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+table{
+    border-spacing: 0px;
+}
+
+.search-table{
+  margin-left: 73.02px;
+  background-color: rgba(255, 255, 255, 0.692) !important;
+}
+
+.title-cell{
+  width: 600px;
+}
+.direct-cell{
+  width: 200px;
+}
+.type-cell{
+  width: 229px;
+}
+
+
+th{
+    padding: 10px;
+}
+
+.movie-title{
+  font-family: sans-serif;
+  font-weight: bold;
+  color:black;
+}
+
+.cast{
+  font-weight: bold;
+  color: darkred;
+}
+
+
+.content-image{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 12px;
+
+  object-fit: cover;
+  object-position: center right;
+}
+
+.friend-image{
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  margin: 5px;
+
+  object-fit: cover;
+  object-position: center right;
+}
+
+.post-title{
+  font-size: 14px;
+  font-family: sans-serif;
+  font-weight: bold;
+  color:black;
+
+}
+
+@import url(https://fonts.googleapis.com/css?family=Arvo:700);
+@import url(https://fonts.googleapis.com/css?family=Seaweed+Script);
+body {
+  background-color: #222;
+  text-align: center;
+}
+.plate {
+  width: auto;
+  margin: 10% auto;
+  background-color: rgba(0,0,0,0.5) !important;
+}
+.shadow {
+  color: rgb(255, 255, 255);
+  font-family: Arvo;
+  font-weight: bolder;
+  text-shadow:
+    -3px -3px 0 #222,
+    3px -3px 0 #222,
+    -3px 3px 0 #222,
+    3px 3px 0 rgb(34, 34, 34),
+    4px 4px 0 rgb(25, 25, 25),
+    5px 5px 0 rgb(5, 41, 221),
+    6px 6px 0 rgb(7, 7, 182),
+    7px 7px 0 rgb(5, 20, 122),
+    8px 8px 0 rgb(2, 17, 115),
+    9px 9px 0 rgb(9, 26, 133),
+    10px 10px 0 rgb(10, 30, 164);
+  line-height: 0.8em;
+  letter-spacing: 0.07em;
+  transform: scaleY(0.7);
+  -webkit-transform: scaleY(0.7);
+  -moz-transform: scaleY(0.7);
+  margin:0;
+  text-align: center;
+
+}
+.script {
+  font-family: "Seaweed Script";
+  color: rgb(239, 248, 246);
+  text-align: center;
+  font-size: 40px;
+  position: relative;
+  margin:0;
+  
+
+}
+.script span {
+  background-color: none;
+  padding: 0 0.3em;
+}
+.script:before {
+  content:"";
+  display: block;
+  position: absolute;
+  z-index:-1;
+  top: 50%;
+  width: 100%;
+  border-bottom: 3px solid rgb(248, 219, 0);
+}
+.text1 {
+  font-size: 60px;
+}
+.text2 {
+  font-size: 200px;
+}
+.text3 {
+  font-size: 150px;
+
+}
+
+.card{
+  height: 370px;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 400px;
+  background-color: rgba(0,0,0,0.5) !important;
+  }
+
+.card-header h3{
+  color: white;
+  }
+
+
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+fieldset, label { margin: 0; padding: 0; }
+body{ margin: 20px; }
+h1 { font-size: 1.5em; margin: 10px; }
+
+/****** Style Star Rating Widget *****/
+
+.rating { 
+  border: none;
+  float: left;
+}
+
+.rating > input { display: none; } 
+.rating > label:before { 
+  margin: 5px;
+  font-size: 2.25em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: '★';
+}
+
+/* .rating > .half:before { 
+  content: "\f089";
+  position: absolute;
+} */
+
+.rating > label { 
+  color: #ddd; 
+ float: right; 
+}
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+
+.rating > input:checked + label:hover, /* hover current star when changing rating */
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+.rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
+
+.wrap {
+  width: auto;
+  height: auto;
+  word-wrap:break-word;
+  word-break:break-all;
+  overflow: hidden;
+}

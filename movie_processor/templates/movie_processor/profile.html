@@ -1,0 +1,83 @@
+{% extends "movie_processor/base.html" %}
+
+{% block user-profile %}
+<main role="main" class="container">
+    {% if not not_exist %}  
+    <div class="my-3 p-2 rounded shadow-sm bg-light">
+        {% if movie_fan%}
+        <table>
+            <tr>   
+                
+                <td><img src="{% url 'photo' movie_fan.user.id %}" class="content-image"></td>
+                {% else %}
+                <td><img src="http://ku.90sjimg.com/element_origin_min_pic/01/55/09/5357474da89f688.jpg" class="content-image"></td>
+                {% endif %}
+                <td><h2 class="pb-3 mb-0 text-black">{{movie_fan.user.username}}</h2><h6 class="pb-3 mb-0 text-black">Welcome to my page.</h6></td>
+            </tr>
+            {% if status %}
+            <tr>
+                <form enctype="multipart/form-data" method='POST' action="{% url 'updatepic' %}">
+                    <td>
+                        {{form.profile_picture}}
+                        <button id="id_update_profile_button" class="btn btn-sm btn-warning btn-block col-10" type="submit">Submit</button>
+                    </td>
+                {% csrf_token %}
+                </form>
+            </tr>
+            {% endif %}
+        </table>  
+        
+    </div>
+
+    <div class="my-3 p-2 bg-light rounded shadow-sm">
+        <table>
+            <tr><p class="font-weight-bold">{{movie_fan.user.username}}'s favorite movies</p></tr>
+            <tr>
+                {% for movie in favorite_movies %}
+                <td><a href="{% url 'movie' movie.id %}"><img src={{movie.poster}} height="120" width="80"></a></td>
+                {% endfor %}
+            </tr>
+        </table>
+    </div>
+
+    <div class="my-3 p-2 bg-light rounded shadow-sm">
+        <p class="font-weight-bold">{{movie_fan.user.username}}'s Posts</p>
+        <div class="media text-muted pt-3">
+            <table class="table table-striped wrap">
+                {% for post in posts %}
+                <tr>
+                    <td><a href="{% url 'movie' post.movie.id %}"><img src={{post.movie.poster}} class="friend-image"></a></td>
+                    <td>
+                        <p class="post-title">{{post.text}}</p>
+                        <h7 class="tags text-dark">Tags:<span class="badge badge-secondary">{{post.movie.movie_type}}</span></h7>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+    <div class="my-3 p-2 bg-light rounded shadow-sm">
+        <p class="font-weight-bold">{{movie_fan.user.username}}'s Watching History</p>       
+
+        <div class="media text-muted pt-3 bg-light">
+            <table>
+                {% for movie in rate_history %}
+                <tr>
+                    <td><a href="{% url 'movie' movie.id %}"><img src={{movie.poster}} height="80" width="60"></a></td>
+                    <td>
+                        <h4 class="pb-0 mb-0 text-dark">{{movie.name}}</h4>
+                        <div class="Introduction"><h6 class="tags">Tags:<span class="badge badge-secondary">{{movie.movie_type}}</span></h6></div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+    {% if status %}
+    <button  class="btn btn-warning btn-block"><a href="{% url 'logout' %}">Logout</a></button>
+    {% endif %}
+    {% endif %} 
+</main>
+{% endblock %}

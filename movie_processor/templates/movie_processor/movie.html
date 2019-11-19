@@ -1,0 +1,164 @@
+
+{% extends "movie_processor/base.html" %}
+
+        
+{% block content%}
+<div class = "bg" style="background-image:url({{movie.poster}})">
+<div class="container">
+    <div class=" plate">
+    <div class="row">
+        <div class="col-6 text-light">
+           <table>
+            <tr>
+                <div class="form-inline "><h4 id = "movie_name" >{{movie.name}}</h4><h4 id = "mivie_release_time"> &nbsp;   ({{movie.release_time}})</h4></div>
+                <span type="hidden" id="movie_id" value={{movie.id}} style="display:none">{{movie.id}}</span>
+            </tr>
+            <tr>
+                <td class="font-weight-bolder text-warning">Ratings:</td>
+                <td><div class="form-inline "><i class="fa fa-star" aria-hidden="true"></i><h5 id = "movie_rating">{{movie.score}}</h5>/10</div></td>
+            </tr>
+
+            <tr>
+                <td class="font-weight-bolder text-warning">Director:</td>
+                <td>{{movie.director}}</td>
+            </tr>
+
+            <tr>
+                <td class="font-weight-bolder text-warning">Category:</td>
+                <td id = "movie_category">{{movie.movie_type}}</td>
+            </tr>
+
+            <tr>
+                <td class="font-weight-bolder text-warning">Stars:</td>
+                <td id = "movie_stars"> {{movie.star}} </td>
+            </tr>
+
+            <tr>
+                <td  class="font-weight-bolder text-warning">Story Overview:</td>
+            </tr>
+
+            <tr id = "movie_story_overview">
+                <td colspan="2" >
+                    <div class = "font-italic">
+                        {{movie.storyline}}
+                    </div>
+                </td>    
+            </tr>
+            {% if isRated == False %}
+            <tr>
+                <td  class="font-weight-bolder text-warning" colspan="2">
+                    Please rate this movie if you have watched it
+                </td>
+            </tr>
+            
+            <tr>
+               <td colspan="2" >
+                   <form class="rate_movie" action = "{% url 'rate_movie' movie.id%}" method="POST">
+                <fieldset class="rating">
+                    <input type="submit" id="star5" name="rating" value="10" /><label class = "full" for="star5" title="Awesome - 10 stars"></label>
+                    <input type="submit" id="star4half" name="rating" value="9" /><label class="half" for="star4half" title="Pretty good - 9 stars"></label>
+                    <input type="submit" id="star4" name="rating" value="8" /><label class = "full" for="star4" title="Pretty good - 8 stars"></label>
+                    <input type="submit" id="star3half" name="rating" value="7" /><label class="half" for="star3half" title="Meh - 7 stars"></label>
+                    <input type="submit" id="star3" name="rating" value="6" /><label class = "full" for="star3" title="Meh - 6 stars"></label>
+                    <input type="submit" id="star2half" name="rating" value="5" /><label class="half" for="star2half" title="Kinda bad - 5 stars"></label>
+                    <input type="submit" id="star2" name="rating" value="4" /><label class = "full" for="star2" title="Kinda bad - 4 stars"></label>
+                    <input type="submit" id="star1half" name="rating" value="3" /><label class="half" for="star1half" title="Meh - 3 stars"></label>
+                    <input type="submit" id="star1" name="rating" value="2" /><label class = "full" for="star1" title="Sucks big time - 2 star"></label>
+                    <input type="submit" id="starhalf" name="rating" value="1" /><label class="half" for="starhalf" title="Sucks big time - 1 stars"></label>
+                    {% csrf_token %}
+                </fieldset>
+            </form>
+        </td>
+            </tr>
+            {% endif %}
+            {% if isRated == True %}
+            <tr>
+                <td  class="font-weight-bolder text-warning">
+                    Your score is:
+                </td>
+                <td> <h2>{{ratedScore}}</h2></td>
+            </tr>
+            {% endif %}
+            </table>
+
+        </div>
+        <div class="col-4 ml-100">
+            <iframe width="540" height="360" src="https://{{movie.trailer_embed_link}}?autoplay=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <!-- <iframe width="720" height="400" src="https://www.youtube.com/embed/X7SiuQxhAjg?autoplay=1&fs=1&controls=0&amp;start=6" frameborder="0" allowfullscreen volumn="0"></iframe> -->
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+
+    <div class="row text-light" >  
+        <h1>{{language_message}}</h1>
+        <div class="col text-center"><h2>Users Comments</h2></div>
+    </div>
+
+    {% if status %}
+    
+        <div class="input-group input-group-lg col-md-5 mx-auto">
+            <div class="input-group-prepend">
+                <button class="btn btn-light" type="button">New Post</button>
+            </div>
+                <input type="text" id="id_post_text" name="post" class="form-control col-4" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-warning btn-sm" id="id_post_button" onclick="addpost({{movie.id}})" type="button">Submit</button>
+                </div>
+        </div>
+        <!-- <label>New Post:</label>
+        <input type="text" id="id_post_text" name='post'>
+        <button class="btn btn-warning btn-sm" id="id_post_button" onclick="addpost({{movie.id}})">Submit</button> -->
+        <span id="error" class="error"></span>
+
+    {% endif %}
+
+
+    <table class="text-light wrap" align = center id="post_stream">
+    </table>
+
+    </div>
+
+    <div class="row text-light">
+        <div class="col text-center"><h2>  Similar movies </h2></div>
+    </div>
+    
+    <div class="row text-light">
+        {% for re_movie in recommand_movie %}
+        <div class="card col">
+                <img class="card-img-top" src= {{re_movie.poster}} height="200" width="100" alt="Card image cap">
+                <div class="card-body">
+                    <a href = "{% url 'movie' re_movie.id %}"><h4 class="card-text text-link">{{re_movie.name}}</h5></a>
+                </div>
+                </div>
+        {% endfor %}
+    </div>
+
+    <div class="row text-light">
+        <div class="col text-center"><h2>  Something you would like: </h2></div>
+    </div>
+    
+    <div class="row text-light">
+        {% for item in goods %}
+            <div class = "card col">
+                <a href={{item.link}}> 
+                    <img class="card-img-top" src={{item.product_picture}} height="200" width="100" alt="Card image cap">
+                    <div class="card-body">
+                        <span class="card-text text-link">{{item.name}}</span>
+                    </div>      
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</div>
+
+
+{% endblock %}

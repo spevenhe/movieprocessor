@@ -1,0 +1,38 @@
+
+{% extends "movie_processor/base.html" %}
+
+{% block home%}
+<div class="bg_home">
+<div class="container">
+<div class="plate">
+        <p class="script"><span>Welcome!</span></p>
+        <p class="shadow text1">This is</p>
+        <p class="shadow text2" >MOVIE</p>
+        <p class="shadow text3">PROCESSOR</p>
+        <p class="script"><span>Start by Searching</span></p>
+        <form action = "{% url 'search'%}" method="post">
+        <div class="input-group">
+                <div class="input-group-prepend">
+                <button class="input-group-text" id="basic-addon1" type="submit">Search</button>
+                </div>
+
+                <input id="enterName" class="form-control mr-sm-2" type="text" name="search_content" value = '' placeholder="name,director,tags" aria-label="Search" required = "required" onkeyup="autoSearch()"  style="border-style:none">
+                
+        </div>
+        <table id="result" class='search-table'>
+        </table>
+                {% csrf_token %}
+        
+        </form>
+        
+</div>
+</div>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</div>
+
+{% endblock %}

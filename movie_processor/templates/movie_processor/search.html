@@ -1,0 +1,52 @@
+{% extends "movie_processor/base.html" %}
+
+{% block search-results %}
+
+<main role="main" class="container">
+    
+    <div class="my-3 p-3 bg-white rounded shadow-sm">
+        <h2 class="pb-3 mb-0">search results</h2>
+        <h6 class="border-bottom border-gray pb-3 mb-0">search by:&nbsp;<span id="id_keywords">{{search_content}}</span></h6>
+        {% if not_found %}
+        <h1 class = "text-center">{{ not_found }}</h1>
+        {% endif %}
+
+        <span id="movie-list">
+        {% for movie in movie_name %}
+        <div class="media text-muted pt-3">
+            <table>
+                <tr>
+                    <td rowspan="2"><div><img src= {{movie.poster}} height="200" width="120"></div></td>
+                    <td>
+                        <a href = "{% url 'movie' movie.id %}"><h4 class="movie-title">{{movie.name}}</h4></a><h6>{{movie.release_time}}, {{movie.movie_length}}</h6>
+                        <h6 class="tags">Tags:<span class="badge badge-secondary">{{movie.movie_type}}</span> </h6>
+                        <div class="Introduction">{{movie.storyline}}</div>
+                        <div class="cast">Director: {{movie.director}}</div>
+                        <div class="cast">Stars: {{movie.star}}</div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        {% endfor %}
+        </span>
+
+    {% if total_page|length > 0 %}
+    <div class="Pagination">
+        <span class="step-links" id="page-links">
+            {% if total_page|length > 1 %}
+                {% for item in total_page %}
+                    <button onclick="getpage({{item}})">{{item}}</button>
+                {% endfor %}
+            {% endif %}
+
+            <span class="current" id="current-page">
+                Page&nbsp{{ movie_name.number }}&nbspof&nbsp{{ movie_name.paginator.num_pages }}.
+            </span>
+    
+        </span>
+    </div>
+    {% endif %}   
+    </div>
+</main>
+
+{% endblock %}
